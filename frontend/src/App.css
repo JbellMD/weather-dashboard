@@ -1,75 +1,197 @@
-body {
+/* General Reset */
+body, html, #root {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: url('./beach.jpg') center/cover no-repeat;
-  /* Use the image */
-  color: #fff;
-  text-align: center;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  background: url('./beach.jpg') center/cover no-repeat;
+  background-attachment: fixed; /* Makes the background static while scrolling */
+  color: #333; /* Neutral text color */
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
 }
 
 .App {
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 100vh;
 }
 
+/* Header */
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #114B5F; /* A bold dark teal */
 }
 
+/* Search Component */
 .search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .search-container input {
-  padding: 10px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  width: 200px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #028090; /* Teal color for focus */
 }
 
 .search-container button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #028090;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #028090;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .search-container button:hover {
-  background-color: #841c26;
+    background-color: #456990; /* Slightly darker teal */
 }
 
+/* WeatherCard Component */
 .weather-info {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 20px;
-  border-radius: 10px;
-  display: inline-block;
-  text-align: left;
-  margin: 0 auto;
+    text-align: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
 }
 
 .weather-info h2 {
-  margin: 0 0 10px;
-  font-size: 1.8rem;
+    font-size: 1.75rem;
+    color: #114B5F;
+    margin-bottom: 0.5rem;
 }
 
 .weather-info p {
-  margin: 5px 0;
-  font-size: 1rem;
+    margin: 0.25rem 0;
+    font-size: 1rem;
 }
 
+/* HourlyForecast Component */
+.hourly-forecast {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.hourly-forecast .hour {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9fafb; /* Light gray */
+    min-width: 80px;
+}
+
+/* WeeklyWeather Component */
+.weekly-forecast {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.weekly-forecast .day {
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9fafb; /* Light gray */
+}
+
+/* WeatherMap Component */
+.leaflet-container {
+    height: 400px;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* WeatherCharts Component */
+.weather-charts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Error Message */
 .error {
-  color: #ff6f61;
-  font-size: 1.2rem;
-  margin-top: 10px;
+    color: #841C26; /* Red for errors */
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+/* Utility Classes */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .search-container input {
+        width: 100%;
+    }
+
+    .hourly-forecast {
+        flex-wrap: wrap;
+        overflow-x: hidden;
+    }
+
+    .weather-info,
+    .leaflet-container,
+    .weekly-forecast {
+        max-width: 100%;
+    }
 }
