@@ -3,7 +3,6 @@ import './App.css';
 import Search from './components/Search';
 import WeatherCard from './components/WeatherCard';
 import HourlyForecast from './components/HourlyForecast';
-import WeeklyWeather from './components/WeeklyWeather';
 import WeatherMap from './components/WeatherMap';
 
 function App() {
@@ -33,11 +32,11 @@ function App() {
             <h1>Weather Dashboard</h1>
             <Search onSearch={fetchWeather} />
             {error && <p className="error">{error}</p>}
-            <WeatherCard weather={weather} />
-            <HourlyForecast city={weather?.name} />
-            {weather && weather.coord && (
-    <WeeklyWeather lat={weather.coord.lat} lon={weather.coord.lon} />
-)}
+            <div className="weather-container">
+                <WeatherCard weather={weather} />
+                <HourlyForecast city={weather?.name} />
+            </div>
+        
             <WeatherMap coord={weather?.coord} />
         </div>
     );

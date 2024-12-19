@@ -6,7 +6,7 @@ body, html, #root {
   font-family: 'Roboto', sans-serif;
   background: url('./beach.jpg') center/cover no-repeat;
   background-attachment: fixed; /* Makes the background static while scrolling */
-  color: #333; /* Neutral text color */
+  color: #21a31d; /* Neutral text color */
 }
 
 h1, h2, h3 {
@@ -28,7 +28,7 @@ h1 {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
-    color: #114B5F; /* A bold dark teal */
+    color: #21a31d; /* A bold dark teal */
 }
 
 /* Search Component */
@@ -50,13 +50,13 @@ h1 {
 }
 
 .search-container input:focus {
-    border-color: #028090; /* Teal color for focus */
+    border-color: #21a31d; /* Teal color for focus */
 }
 
 .search-container button {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
-    background-color: #028090;
+    background-color: #21a31d;
     color: white;
     border: none;
     border-radius: 5px;
@@ -66,6 +66,14 @@ h1 {
 
 .search-container button:hover {
     background-color: #456990; /* Slightly darker teal */
+}
+
+.weather-container {
+  display: flex;
+  gap: 1rem; /* Space between the components */
+  justify-content: center; /* Center the components horizontally */
+  align-items: flex-start; /* Align components to the top */
+  margin: 1rem 0; /* Add some margin around the container */
 }
 
 /* WeatherCard Component */
@@ -78,12 +86,12 @@ h1 {
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 200px;
 }
 
 .weather-info h2 {
     font-size: 1.75rem;
-    color: #114B5F;
+    color: #21a31d;
     margin-bottom: 0.5rem;
 }
 
