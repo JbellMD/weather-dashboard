@@ -1,8 +1,33 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+    faCloud,
+    faCloudRain,
+    faSnowflake,
+    faSun,
+    faMoon,
+    faCloudSun,
+    faBolt,
+    faSmog,
+    faQuestion
+} from '@fortawesome/free-solid-svg-icons';
+import { celsiusToFahrenheit, getWeatherIcon } from '../utils/weatherUtils';
 
 const HourlyForecast = ({ city }) => {
     const [hourlyData, setHourlyData] = useState([]);
     const [error, setError] = useState('');
+
+    const iconMap = {
+        'sun': faSun,
+        'moon': faMoon,
+        'cloud': faCloud,
+        'cloud-sun': faCloudSun,
+        'cloud-rain': faCloudRain,
+        'snowflake': faSnowflake,
+        'bolt': faBolt,
+        'smog': faSmog,
+        'question': faQuestion
+    };
 
     const fetchHourlyForecast = useCallback(async () => {
         if (!city) return;
@@ -14,30 +39,54 @@ const HourlyForecast = ({ city }) => {
             const response = await fetch(url);
             if (!response.ok) throw new Error('Unable to fetch hourly forecast');
             const data = await response.json();
-            setHourlyData(data.list.slice(0, 8)); // Get the next 24 hours (3-hour intervals)
+            setHourlyData(data.list.slice(0, 8));
             setError('');
         } catch (err) {
             setError(err.message);
             setHourlyData([]);
         }
-    }, [city]); // Memoize the function based on the `city` dependency
+    }, [city]);
 
     useEffect(() => {
         fetchHourlyForecast();
-    }, [fetchHourlyForecast]); // Use the memoized function as a dependency
+    }, [fetchHourlyForecast]);
 
     return (
-        <div>
-            <h3>Hourly Forecast</h3>
+        <div className="forecast-container">
+            <div className="forecast-header">
+                <h3>Hourly Forecast</h3>
+            </div>
             {error && <p className="error">{error}</p>}
             <div className="hourly-forecast">
-                {hourlyData.map((hour, index) => (
-                    <div key={index} className="hour">
-                        <p>{new Date(hour.dt_txt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                        <p>{hour.main.temp}°C</p>
-                        <p>{hour.weather[0].description}</p>
-                    </div>
-                ))}
+                {hourlyData.map((hour, index) => {
+                    const weatherIcon = getWeatherIcon(hour.weather[0].description);
+                    const tempF = celsiusToFahrenheit(hour.main.temp);
+                    return (
+                        <div key={index} className="hour">
+                            <div className="hour-time">
+                                {new Date(hour.dt_txt).toLocaleTimeString([], { 
+                                    hour: 'numeric',
+                                    minute: '2-digit',
+                                    hour12: true
+                                })}
+                            </div>
+                            <div className="hour-icon">
+                                <FontAwesomeIcon 
+                                    icon={iconMap[weatherIcon]} 
+                                    size="lg"
+                                />
+                            </div>
+                            <div className="hour-temp">
+                                <span className="temp-f">{tempF}°F</span>
+                                <span className="temp-c">({hour.main.temp.toFixed(1)}°C)</span>
+                            </div>
+                            <div className="hour-condition">
+                                {hour.weather[0].description.charAt(0).toUpperCase() + 
+                                 hour.weather[0].description.slice(1)}
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
