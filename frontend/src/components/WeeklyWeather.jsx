@@ -29,7 +29,7 @@ const WeeklyWeather = ({ lat, lon }) => {
 
     return (
         <div>
-            <h3>Weekly Forecast</h3>
+            <h3>Weekly Weather Forecast</h3>
             {error && <p className="error">{error}</p>}
             {weeklyData.length === 0 ? (
                 <p>Loading weekly data...</p>
