@@ -45,7 +45,7 @@ function App() {
             <Navigation />
             <main className="main-content">
                 <div className="search-section">
-                    <h1>Weather Dashboard</h1>
+                    <h1>WeatherHub Dashboard</h1>
                     <div className="search-container">
                         <input
                             type="text"
